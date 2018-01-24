@@ -1,0 +1,19 @@
+heat_template_version: 2016-10-14
+description: A server with user data
+resources:
+  my_instance:
+    type: OS::Nova::Server
+    properties:
+      config_drive: true
+      key_name: 'mykey1'
+      image: 'cirros-0.3.5-x86_64-disk'
+      flavor: 1
+      networks:
+        - network: private
+      user_data_format: RAW
+      user_data: |
+        #!/bin/sh
+        echo 'starting "yes"'
+        yes >/dev/null 2>&1
+        echo '"yes" stopped'
+
